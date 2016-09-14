@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		xmlns:views="org.gestouch.examples.views.*"
+		xmlns:controls="org.gestouch.examples.controls.*"
+		title="Gestouch Examples"
+		destructionPolicy="never"
+		>
+	<fx:Script>
+		<![CDATA[
+			import mx.utils.ObjectUtil;
+			import org.gestouch.examples.model.ExamplesModel;
+			import mx.core.IFlexDisplayObject;
+			import spark.components.Button;
+			import spark.events.IndexChangeEvent;
+
+			import org.gestouch.examples.containers.MonsterDebuggerConfigWindow;
+
+			import mx.managers.PopUpManager;
+			
+			[Embed("/assets/images/monsterdebugger-icon.png")]
+			private static const debuggerIconAsset:Class;
+			
+			private var debuggerButton:Button;
+			
+			[Bindable]
+			private var dataModel:ExamplesModel;
+			
+			
+			override protected function init():void
+			{
+				navigationContent = [];
+				debuggerButton = new Button();
+				debuggerButton.setStyle("icon", debuggerIconAsset);
+				debuggerButton.addEventListener(MouseEvent.CLICK, debuggerButton_clickHandler);
+//				actionContent = [debuggerButton];
+
+				dataModel = data as ExamplesModel;
+			}
+			
+			
+			override protected function onViewActivate():void
+			{
+				super.onViewActivate();
+				
+				list.selectedIndex = -1;
+			}
+			
+			
+			private function onListChange(event:IndexChangeEvent):void
+			{
+				if (event.newIndex > -1)
+				{
+					const data:Object = {};
+					for (var k:* in list.selectedItem)
+					{
+						data[k] = list.selectedItem[k];
+					}
+					data.title = list.selectedItem.label;					
+					var viewClass:Class = list.selectedItem.viewClass;
+					navigator.pushView(viewClass, data);
+				}
+			}
+			
+			
+			private function debuggerButton_clickHandler(event:MouseEvent):void
+			{
+				var window:IFlexDisplayObject = PopUpManager.createPopUp(this, MonsterDebuggerConfigWindow, true);
+				PopUpManager.centerPopUp(window);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:List id="list" width="100%" height="100%" dataProvider="{dataModel.examplesList}"
+		change="onListChange(event)"
+	/>
+</views:ExampleViewBase>

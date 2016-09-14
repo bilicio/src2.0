@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:views="org.gestouch.examples.views.*"
+	xmlns:controls="org.gestouch.examples.controls.*"
+	xmlns:containers="org.gestouch.examples.containers.*"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenMax;
+			import com.greensock.plugins.GlowFilterPlugin;
+			import com.greensock.plugins.TweenPlugin;
+
+			import org.gestouch.events.GestureEvent;
+			import org.gestouch.gestures.LongPressGesture;
+
+			
+			
+			private var longPressGesture:LongPressGesture;
+
+
+			override protected function init():void
+			{
+				super.init();
+				
+				TweenPlugin.activate([GlowFilterPlugin]);
+			}
+			
+			
+			override protected function onViewActivate():void
+			{
+				super.onViewActivate();
+				
+				longPressGesture = new LongPressGesture(button);
+				longPressGesture.addEventListener(org.gestouch.events.GestureEvent.GESTURE_BEGAN, onGesture);
+				
+				slopSlider.value = longPressGesture.slop;
+				touchesSlider.value = longPressGesture.numTouchesRequired;
+				pressDurationSlider.value = longPressGesture.minPressDuration;
+			}
+			
+			
+			override protected function onViewDeactivate():void
+			{
+				super.onViewDeactivate();
+				
+				if (longPressGesture)
+				{
+					longPressGesture.dispose();// all event listeners automatically removed
+					longPressGesture = null;
+				}
+			}
+			
+
+			private function onGesture(event:org.gestouch.events.GestureEvent):void
+			{
+				TweenMax.fromTo(button, 1,
+					{glowFilter: {color: 0xCCCCCC * Math.random(), blurX: 64, blurY: 64, strength: 3, alpha: 1, quality: 1}},
+					{glowFilter: {alpha: 0, remove: true}}
+				);
+			}
+			
+			
+			private function onSlopSliderChange(event:Event = null):void
+			{
+				if (longPressGesture)
+				{
+					longPressGesture.slop = slopSlider.value;
+				}
+			}
+			
+			
+			private function onTouchesSliderChange(event:Event = null):void
+			{
+				if (longPressGesture)
+				{
+					longPressGesture.numTouchesRequired = touchesSlider.value;
+				}
+			}
+			
+			
+			private function onPressDurationSliderChange(event:Event = null):void
+			{
+				if (longPressGesture)
+				{
+					longPressGesture.minPressDuration = pressDurationSlider.value;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button id="button" label="Hold Me" minWidth="350" minHeight="300" horizontalCenter="0" verticalCenter="0"/>
+
+	<fx:Declarations>
+		<containers:SettingsPanel id="settings">
+			<s:Label text="slop"/>
+			<s:HSlider id="slopSlider"
+				minimum="0" maximum="50" stepSize="1" dataTipPrecision="0"
+				change="onSlopSliderChange(event)"/>
+			
+			<s:Label text="numTouchesRequired"/>
+			<s:HSlider id="touchesSlider"
+				minimum="1" maximum="4" stepSize="1" dataTipPrecision="0"
+				change="onTouchesSliderChange(event)"/>
+			
+			<s:Label text="minPressDuration"/>
+			<s:HSlider id="pressDurationSlider"
+				minimum="0" maximum="2000" stepSize="100" dataTipPrecision="0"
+				change="onPressDurationSliderChange(event)"/>
+		</containers:SettingsPanel>	
+	</fx:Declarations>
+	
+</views:ExampleViewBase>

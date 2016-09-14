@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+   <usuario>
+      <id><![CDATA[INTEGER PRIMARY KEY AUTOINCREMENT]]></id>
+      <nome><![CDATA[TEXT]]></nome>
+      <datanasc><![CDATA[TEXT]]></datanasc>
+      <email><![CDATA[TEXT]]></email>
+      <sexo><![CDATA[TEXT]]></sexo>
+      <cpf><![CDATA[TEXT]]></cpf>
+      <cidade><![CDATA[TEXT]]></cidade>
+      <estado><![CDATA[TEXT]]></estado>
+      <time><![CDATA[TEXT]]></time>
+      <esporte><![CDATA[TEXT]]></esporte>
+      <frase><![CDATA[TEXT]]></frase>
+   </usuario>
+</items>
