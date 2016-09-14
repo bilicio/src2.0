@@ -1,0 +1,41 @@
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="AIRSDK" />
+      <type value="Flex SDK Type (new)" />
+      <version value="AIR SDK 21.0.0.215" />
+      <homePath value="C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK" />
+      <roots>
+        <annotationsPath>
+          <root type="composite" />
+        </annotationsPath>
+        <classPath>
+          <root type="composite">
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/player/21.0/playerglobal.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/airglobal.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/core.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/asc-support.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/aircore.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/gamepad.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/crosspromotion.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/servicemonitor.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/applicationupdater.swc!/" />
+            <root type="simple" url="jar://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/libs/air/applicationupdater_ui.swc!/" />
+          </root>
+        </classPath>
+        <javadocPath>
+          <root type="composite" />
+        </javadocPath>
+        <sourcePath>
+          <root type="composite">
+            <root type="simple" url="file://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/projects/air/Core/src" />
+            <root type="simple" url="file://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/projects/air/Licensing/Android/Lib/src" />
+            <root type="simple" url="file://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/projects/air/Licensing/Android/Java/src" />
+            <root type="simple" url="file://C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/eclipse/plugins/com.adobe.flash.compiler_4.7.0.349722/AIRSDK/frameworks/projects/air/ApplicationUpdater/src" />
+          </root>
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+  </component>
+</application>
