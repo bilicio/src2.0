@@ -1,0 +1,22 @@
+<application>
+  <component name="libraryTable">
+    <library name="src2" type="flex">
+      <CLASSES>
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/AeonDesktopTheme/swc" />
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MetalWorksDesktopTheme/swc" />
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MetalWorksMobileTheme/swc" />
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MinimalDesktopTheme/swc" />
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MinimalMobileTheme/swc" />
+        <root url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/TopcoatLightMobileTheme/swc" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/AeonDesktopTheme/swc" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MetalWorksDesktopTheme/swc" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MetalWorksMobileTheme/swc" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MinimalDesktopTheme/swc" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/MinimalMobileTheme/swc" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Documents/projetos/_classes/src2.0/feathers/themes/TopcoatLightMobileTheme/swc" recursive="false" />
+    </library>
+  </component>
+</application>
