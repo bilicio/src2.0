@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:views="org.gestouch.examples.views.*"
+	xmlns:controls="org.gestouch.examples.controls.*"
+	xmlns:containers="org.gestouch.examples.containers.*"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenMax;
+
+			import org.gestouch.events.GestureEvent;
+			import org.gestouch.gestures.TapGesture;
+			
+			
+			private var doubleTapGesture:TapGesture;
+			private var twoFingerTapGesture:TapGesture;
+			
+			
+			override protected function onViewActivate():void
+			{
+				super.onViewActivate();
+				
+				doubleTapGesture = new TapGesture(button);
+				doubleTapGesture.numTapsRequired = 2;
+				doubleTapGesture.addEventListener(org.gestouch.events.GestureEvent.GESTURE_RECOGNIZED, onGesture);
+				
+				twoFingerTapGesture = new TapGesture(button);
+				twoFingerTapGesture.numTouchesRequired = 2;
+				twoFingerTapGesture.addEventListener(org.gestouch.events.GestureEvent.GESTURE_RECOGNIZED, onGesture);
+			}
+			
+			
+			override protected function onViewDeactivate():void
+			{
+				super.onViewDeactivate();
+				
+				if (doubleTapGesture)
+				{
+					doubleTapGesture.dispose();// all event listeners automatically removed
+					doubleTapGesture = null;
+				}
+				if (twoFingerTapGesture)
+				{
+					twoFingerTapGesture.dispose();// all event listeners automatically removed
+					twoFingerTapGesture = null;
+				}
+			}
+			
+
+			private function onGesture(event:org.gestouch.events.GestureEvent):void
+			{
+				var gesture:TapGesture = event.target as TapGesture;
+				var scale:Number;
+				if (gesture == doubleTapGesture)
+				{
+					scale = button.scaleX * 1.2;
+				}
+				else
+				{
+					scale = button.scaleX / 1.2;
+				}
+				
+				TweenMax.to(button, 0.3, {
+					scaleX: scale,
+					scaleY: scale
+				});
+			}
+		]]>
+	</fx:Script>
+
+	<s:Label text="Double-tap to zoom-in, two-finger tap to zoom-out"/>
+	<s:Button id="button" label="O^2 / O O" minWidth="400" minHeight="300" horizontalCenter="0" verticalCenter="0"/>
+	
+</views:ExampleViewBase>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:views="org.gestouch.examples.views.*"
+	xmlns:controls="org.gestouch.examples.controls.*"
+	xmlns:containers="org.gestouch.examples.containers.*"
+	creationComplete="centerImage()"
+	resize="centerImage()"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import org.gestouch.events.GestureEvent;
+			import org.gestouch.gestures.RotateGesture;
+			
+			
+			private var rotate:RotateGesture;
+			
+			
+			override protected function onViewActivate():void
+			{
+				super.onViewActivate();
+				
+				rotate = new RotateGesture(image);
+				rotate.addEventListener(org.gestouch.events.GestureEvent.GESTURE_BEGAN, onGesture);
+				rotate.addEventListener(org.gestouch.events.GestureEvent.GESTURE_CHANGED, onGesture);
+			}
+			
+			
+			override protected function onViewDeactivate():void
+			{
+				super.onViewDeactivate();
+				
+				if (rotate)
+				{
+					rotate.dispose();// all event listeners automatically removed
+					rotate = null;
+				}
+			}
+			
+			
+			private function onGesture(event:org.gestouch.events.GestureEvent):void
+			{
+				const gesture:RotateGesture = event.target as RotateGesture;
+				
+				var matrix:Matrix = image.transform.matrix;
+				var transformPoint:Point = matrix.transformPoint(image.globalToLocal(rotate.location));
+				matrix.translate(-transformPoint.x, -transformPoint.y);
+				matrix.rotate(gesture.rotation);
+				matrix.translate(transformPoint.x, transformPoint.y);
+				image.transform.matrix = matrix;
+			}
+			
+			
+			private function centerImage():void
+			{
+				image.transform.matrix = new Matrix();
+				image.x = (width - image.width) >> 1;
+				image.y = (width - image.height) >> 1;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Image id="image"
+		source="@Embed(source='/../build/assets/images/placekitten-400-600.jpg')"
+		/>
+	
+</views:ExampleViewBase>

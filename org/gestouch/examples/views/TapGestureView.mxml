@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:views="org.gestouch.examples.views.*"
+	xmlns:controls="org.gestouch.examples.controls.*"
+	xmlns:containers="org.gestouch.examples.containers.*"
+	xmlns:gestures="org.gestouch.gestures.*"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenMax;
+			import com.greensock.plugins.GlowFilterPlugin;
+			import com.greensock.plugins.TweenPlugin;
+
+
+			override protected function init():void
+			{
+				super.init();
+				
+				TweenPlugin.activate([GlowFilterPlugin]);
+			}
+			
+			
+			override protected function onViewDeactivate():void
+			{
+				super.onViewDeactivate();
+				
+				if (tap)
+				{
+					tap.removeAllEventListeners();
+					// Do not dispose it because view can be activated again.
+					// Removing all event listeners is enough for it to be GC-ed
+					// as soon as this view is GC-ed.
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button id="button" label="Tap Me" minWidth="400" minHeight="300" horizontalCenter="0" verticalCenter="0"/>
+
+	<fx:Declarations>
+		<containers:SettingsPanel id="settings">	
+			<s:Label text="slop"/>
+			<s:HSlider id="slopSlider"
+				minimum="0" maximum="100" stepSize="1" dataTipPrecision="0"
+				value="@{tap.slop}"
+				/>
+			
+			<s:Label text="numTouchesRequired"/>
+			<s:HSlider id="touchesSlider"
+				minimum="1" maximum="4" stepSize="1" dataTipPrecision="0"
+				value="@{tap.numTouchesRequired}"
+				/>
+			
+			<s:Label text="numTapsRequired"/>
+			<s:HSlider id="tapsSlider"
+				minimum="1" maximum="4" stepSize="1" dataTipPrecision="0"
+				value="@{tap.numTapsRequired}"
+				/>
+			
+			<s:Label text="maxTapDelay"/>
+			<s:HSlider id="maxTapDelaySlider"
+				minimum="300" maximum="1000" stepSize="100" dataTipPrecision="0"
+				value="@{tap.maxTapDelay}"
+				/>
+			
+			<s:Label text="maxTapDuration"/>
+			<s:HSlider id="maxTapDurationSlider"
+				minimum="500" maximum="5000" stepSize="100" dataTipPrecision="0"
+				value="@{tap.maxTapDuration}"
+				/>
+		</containers:SettingsPanel>
+		
+		<gestures:TapGesture id="tap" target="{button}"
+			maxTapDuration="@{maxTapDurationSlider.value}"
+			maxTapDelay="@{maxTapDelaySlider.value}"
+			numTapsRequired="@{tapsSlider.value}"
+			numTouchesRequired="@{touchesSlider.value}"
+		>
+			<gestures:gestureStateChange>
+				trace("gesture state changed from " + event.oldState + " to " + event.newState);
+			</gestures:gestureStateChange>
+			<gestures:gestureRecognized><![CDATA[
+				TweenMax.fromTo(button, 1,
+					{glowFilter: {color: 0xCCCCCC * Math.random(), blurX: 64, blurY: 64, strength: 3, alpha: 1, quality: 1}},
+					{glowFilter: {alpha: 0, remove: true}}
+				);
+			]]></gestures:gestureRecognized>
+		</gestures:TapGesture>
+	</fx:Declarations>
+	
+</views:ExampleViewBase>

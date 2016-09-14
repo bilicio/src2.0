@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	splashScreenImage="@Embed('/assets/images/Splashscreen.png')"
+	splashScreenScaleMode="letterbox"
+	splashScreenMinimumDisplayTime="1000"
+	firstView="org.gestouch.examples.views.GestouchExamplesHomeView"
+	frameRate="60"
+	initialize="init()"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import org.gestouch.examples.model.ExamplesModel;
+
+			
+			private var model:ExamplesModel = new ExamplesModel();
+			
+			
+			private function init():void
+			{
+				navigator.firstViewData = model;
+			}
+		]]>
+	</fx:Script>
+</s:ViewNavigatorApplication>

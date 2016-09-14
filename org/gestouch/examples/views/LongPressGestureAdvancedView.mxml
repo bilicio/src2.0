@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:ExampleViewBase xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:views="org.gestouch.examples.views.*"
+	xmlns:controls="org.gestouch.examples.controls.*"
+	xmlns:containers="org.gestouch.examples.containers.*"
+	>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenMax;
+			import com.greensock.plugins.GlowFilterPlugin;
+			import com.greensock.plugins.TweenPlugin;
+
+			import org.gestouch.core.GestureState;
+			import org.gestouch.events.GestureEvent;
+			import org.gestouch.gestures.Gesture;
+			import org.gestouch.gestures.LongPressGesture;
+
+			
+			
+			private var longPressGesture:LongPressGesture;
+			
+			private var fingerToImageOffset:Point = new Point();
+			private var initialTransform:Matrix;
+
+
+			override protected function init():void
+			{
+				super.init();
+				
+				TweenPlugin.activate([GlowFilterPlugin]);
+			}
+			
+			
+			override protected function onViewActivate():void
+			{
+				super.onViewActivate();
+				
+				longPressGesture = new LongPressGesture(image);
+				longPressGesture.addEventListener(org.gestouch.events.GestureEvent.GESTURE_STATE_CHANGE, onGesture);
+			}
+			
+			
+			override protected function onViewDeactivate():void
+			{
+				super.onViewDeactivate();
+				
+				if (longPressGesture)
+				{
+					longPressGesture.dispose();
+					longPressGesture = null;
+				}
+			}
+			
+			
+			private function onGesture(event:org.gestouch.events.GestureEvent):void
+			{
+				const gesture:Gesture = event.target as Gesture;
+				var loc:Point = globalToLocal(gesture.location);
+				
+				switch (event.newState)
+				{
+					case GestureState.BEGAN:
+						initialTransform = image.transform.matrix;
+						TweenMax.to(image, 0.5, {alpha: 0.5, glowFilter: {color: 0xEEEEEE * Math.random(), blurX: 16, blurY: 16, strength: 2, alpha: 1}});
+						fingerToImageOffset.x = image.x - loc.x;
+						fingerToImageOffset.y = image.y - loc.y;
+						break;
+					
+					case GestureState.CHANGED:
+						image.move(fingerToImageOffset.x + loc.x, fingerToImageOffset.y + loc.y);
+						break;
+					
+					case GestureState.ENDED:
+						TweenMax.to(image, 1, {alpha: 1, glowFilter: {alpha: 0, remove: true}});
+						break;
+					
+					case GestureState.CANCELLED:
+						TweenMax.to(image, 0, {alpha: 1, glowFilter: {alpha: 0, remove: true}});
+						image.transform.matrix = initialTransform;
+						break;
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Image id="image"
+		source="@Embed(source='/../build/assets/images/placekitten.jpg')"
+		horizontalCenter="0" verticalCenter="0"
+		/>
+	
+</views:ExampleViewBase>
